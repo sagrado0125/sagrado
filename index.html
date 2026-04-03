@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -9,122 +10,99 @@
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  background: #000;
-  color: #fff;
-}
-
-/* タイトル */
-h1 {
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 28px;
-  letter-spacing: 4px;
-}
-
-/* グリッド */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  padding: 20px;
-}
-
-/* 商品 */
-.product {
-  background: #111;
-  padding: 20px;
-  text-align: center;
-  transition: 0.3s;
-  border: 1px solid #222;
-}
-
-.product:hover {
-  transform: translateY(-5px);
-}
-
-/* 画像 */
-.product img {
-  width: 100%;
-  height: auto;
-}
-
-/* タイトル */
-.product h2 {
-  margin: 15px 0 5px;
-  font-size: 16px;
-  letter-spacing: 2px;
-}
-
-/* 価格 */
-.product p {
-  color: #aaa;
-  margin: 5px 0 15px;
-}
-
-/* ボタン */
-.product a {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid #fff;
-  color: #fff;
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.product a:hover {
   background: #fff;
   color: #000;
 }
 
-footer {
-  text-align: center;
-  padding: 40px;
+/* ナビ */
+nav {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  background: #fff;
   font-size: 12px;
-  color: #666;
+  letter-spacing: 2px;
+}
+
+/* セクション */
+section {
+  padding: 100px 20px;
+}
+
+/* TOP */
+.hero img {
+  width: 100%;
+}
+
+/* 商品 */
+.product {
+  margin-bottom: 60px;
+}
+
+.product img {
+  width: 100%;
+}
+
+.buy {
+  display: inline-block;
+  margin-top: 10px;
+  border-bottom: 1px solid #000;
+  text-decoration: none;
+  color: #000;
+}
+
+/* ABOUT */
+.about {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
 }
 </style>
 </head>
 
 <body>
 
-<h1>SAGRADO.</h1>
+<nav>
+  <a href="#top">TOP</a>
+  <a href="#products">PRODUCTS</a>
+  <a href="#about">ABOUT</a>
+</nav>
 
-<div class="product-grid">
+<section id="top" class="hero">
+  <img src="black.jpg">
+</section>
+
+<section id="products">
+  <h2>PRODUCTS</h2>
 
   <div class="product">
     <img src="black.jpg">
-    <h2>Product 1</h2>
-    <p>¥8,800</p>
-    <a href="https://paypal.me/sagrado1999/8800">BUY</a>
+    <p>SAGRADO. T-SHIRT</p>
+    <p>¥15,000</p>
+    <a class="buy" href="https://paypal.me/sagrado1999/15000">BUY</a>
   </div>
 
   <div class="product">
     <img src="black.jpg">
-    <h2>Product 2</h2>
-    <p>¥12,800</p>
-    <a href="https://paypal.me/sagrado1999/12800">BUY</a>
-  </div>
-
-  <div class="product">
-    <img src="black.jpg">
-    <h2>Product 3</h2>
-    <p>¥5,800</p>
-    <a href="https://paypal.me/sagrado1999/5800">BUY</a>
-  </div>
-
-  <div class="product">
-    <img src="black.jpg">
-    <h2>Product 4</h2>
+    <p>SAGRADO. HOODIE</p>
     <p>¥28,000</p>
-    <a href="https://paypal.me/sagrado1999/28000">BUY</a>
+    <a class="buy" href="https://paypal.me/sagrado1999/28000">BUY</a>
   </div>
 
-</div>
+</section>
 
-<footer>
-© SAGRADO.
-</footer>
+<section id="about">
+  <h2>ABOUT</h2>
+  <div class="about">
+    SAGRADO.はストリートとラグジュアリーを融合させたブランド。<br>
+    シンプルで洗練されたデザインを追求し、日常に特別な価値を提供する。
+  </div>
+</section>
 
 </body>
 </html>
