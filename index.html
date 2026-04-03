@@ -1,101 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAGRADO.</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* タイトル */
+h1 {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 28px;
+  letter-spacing: 4px;
+}
+
+/* グリッド */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+/* 商品 */
+.product {
+  background: #111;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #222;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+/* 画像 */
+.product img {
+  width: 100%;
+  height: auto;
+}
+
+/* タイトル */
+.product h2 {
+  margin: 15px 0 5px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* 価格 */
+.product p {
+  color: #aaa;
+  margin: 5px 0 15px;
+}
+
+/* ボタン */
+.product a {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.product a:hover {
+  background: #fff;
+  color: #000;
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 12px;
+  color: #666;
+}
+</style>
 </head>
+
 <body>
-    <h1>Buy Our Products</h1>
-    <div class="product">
-        <h2>Product 1</h2>
-        <p>Price: ¥8,800</p>
-        <a href="https://paypal.me/sagrado1999/8800">Buy Now</a>
-    </div>
-    <div class="product">
-        <h2>Product 2</h2>
-        <p>Price: ¥12,800</p>
-        <a href="https://paypal.me/sagrado1999/12800">Buy Now</a>
-    </div>
-    <div class="product">
-        <h2>Product 3</h2>
-        <p>Price: ¥5,800</p>
-        <a href="https://paypal.me/sagrado1999/5800">Buy Now</a>
-    </div>
-    <div class="product">
-        <h2>Product 4</h2>
-        <p>Price: ¥28,000</p>
-        <a href="https://paypal.me/sagrado1999/28000">Buy Now</a>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Brand Design Inspired by Louis Vuitton</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin: 20px 0;
-            color: #b49d2a; /* Gold Accent */
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        .product {
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-        .product:hover {
-            transform: scale(1.05);
-        }
-        .product img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .product-title {
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        .product-price {
-            font-size: 1.2em;
-            color: #b49d2a; /* Gold Accent */
-        }
-    </style>
-</head>
-<body>
-    <h1>Welcome to Our Luxurious Collection</h1>
-    <div class="product-grid">
-        <!-- Product Items -->
-        <div class="product">
-            <img src="product1.jpg" alt="Product 1">
-            <div class="product-title">Product 1</div>
-            <div class="product-price">$100</div>
-        </div>
-        <div class="product">
-            <img src="product2.jpg" alt="Product 2">
-            <div class="product-title">Product 2</div>
-            <div class="product-price">$200</div>
-        </div>
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <div class="product-title">Product 3</div>
-            <div class="product-price">$300</div>
-        </div>
-    </div>
+
+<h1>SAGRADO.</h1>
+
+<div class="product-grid">
+
+  <div class="product">
+    <img src="black.jpg">
+    <h2>Product 1</h2>
+    <p>¥8,800</p>
+    <a href="https://paypal.me/sagrado1999/8800">BUY</a>
+  </div>
+
+  <div class="product">
+    <img src="black.jpg">
+    <h2>Product 2</h2>
+    <p>¥12,800</p>
+    <a href="https://paypal.me/sagrado1999/12800">BUY</a>
+  </div>
+
+  <div class="product">
+    <img src="black.jpg">
+    <h2>Product 3</h2>
+    <p>¥5,800</p>
+    <a href="https://paypal.me/sagrado1999/5800">BUY</a>
+  </div>
+
+  <div class="product">
+    <img src="black.jpg">
+    <h2>Product 4</h2>
+    <p>¥28,000</p>
+    <a href="https://paypal.me/sagrado1999/28000">BUY</a>
+  </div>
+
+</div>
+
+<footer>
+© SAGRADO.
+</footer>
+
 </body>
 </html>
