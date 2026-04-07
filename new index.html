@@ -1,0 +1,396 @@
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { ShoppingBag, Waves, Cross, Search, Star, Truck, ShieldCheck, Instagram } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+
+const PRODUCTS = [
+  {
+    id: 1,
+    name: "Santa Cruz Wave Tee",
+    price: 5200,
+    category: "T-Shirts",
+    size: ["S", "M", "L", "XL"],
+    image:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80",
+    description: "クロスと波を合わせた、爽やかなメインTシャツ。",
+    badge: "Best Seller",
+  },
+  {
+    id: 2,
+    name: "Azul Cross Logo Tee",
+    price: 4800,
+    category: "T-Shirts",
+    size: ["M", "L", "XL"],
+    image:
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1200&q=80",
+    description: "オールドアメリカンな雰囲気のロゴT。",
+    badge: "New",
+  },
+  {
+    id: 3,
+    name: "Mar Hoodie",
+    price: 8900,
+    category: "Hoodies",
+    size: ["M", "L", "XL"],
+    image:
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=80",
+    description: "海を感じるブルートーンのフーディー。",
+    badge: "Limited",
+  },
+  {
+    id: 4,
+    name: "Old Harbor Cap",
+    price: 3900,
+    category: "Caps",
+    size: ["Free"],
+    image:
+      "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=1200&q=80",
+    description: "街でも海辺でも合わせやすい定番キャップ。",
+    badge: "Popular",
+  },
+  {
+    id: 5,
+    name: "Costa Long Sleeve",
+    price: 6800,
+    category: "Long Sleeve",
+    size: ["S", "M", "L", "XL"],
+    image:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+    description: "シンプルな十字架とスペイン語を組み合わせた一枚。",
+    badge: "Restock",
+  },
+  {
+    id: 6,
+    name: "Blue Tide Tote",
+    price: 3200,
+    category: "Bags",
+    size: ["Free"],
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80",
+    description: "普段使いしやすいブルーカラーのトート。",
+    badge: "New",
+  },
+];
+
+const yen = (value: number) => `¥${value.toLocaleString("ja-JP")}`;
+
+export default function OceanCrossEC() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
+  const [cart, setCart] = useState<number[]>([]);
+
+  const categories = ["All", ...Array.from(new Set(PRODUCTS.map((p) => p.category)))];
+
+  const filtered = useMemo(() => {
+    return PRODUCTS.filter((p) => {
+      const matchesQuery =
+        p.name.toLowerCase().includes(query.toLowerCase()) ||
+        p.description.toLowerCase().includes(query.toLowerCase());
+      const matchesCategory = category === "All" || p.category === category;
+      return matchesQuery && matchesCategory;
+    });
+  }, [query, category]);
+
+  const cartItems = PRODUCTS.filter((p) => cart.includes(p.id));
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  const addToCart = (id: number) => {
+    setCart((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  };
+
+  const removeFromCart = (id: number) => {
+    setCart((prev) => prev.filter((item) => item !== id));
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <header className="sticky top-0 z-30 border-b bg-white/85 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <div>
+            <div className="flex items-center gap-2">
+              <Waves className="h-5 w-5 text-sky-600" />
+              <Cross className="h-5 w-5 text-sky-800" />
+              <span className="text-lg font-semibold tracking-[0.25em]">MAR CRUZ</span>
+            </div>
+            <p className="text-xs text-slate-500">Sea / Cross / Old American</p>
+          </div>
+          <nav className="hidden gap-6 text-sm md:flex">
+            <a href="#home" className="hover:text-sky-700">Home</a>
+            <a href="#shop" className="hover:text-sky-700">Shop</a>
+            <a href="#story" className="hover:text-sky-700">Story</a>
+            <a href="#contact" className="hover:text-sky-700">Contact</a>
+          </nav>
+          <Button className="rounded-2xl">
+            <ShoppingBag className="mr-2 h-4 w-4" />
+            Cart ({cart.length})
+          </Button>
+        </div>
+      </header>
+
+      <section id="home" className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-white to-slate-100" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-col justify-center"
+          >
+            <Badge className="mb-4 w-fit rounded-full bg-sky-100 px-4 py-1 text-sky-800 hover:bg-sky-100">
+              2026 Spring Collection
+            </Badge>
+            <h1 className="max-w-xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              海とクロスを纏う、
+              <span className="block text-sky-700">ストリートアパレルEC</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
+              爽やかなブルー、オールドアメリカンな空気感、スペイン語のアクセント。
+              若い世代に向けたブランドの世界観を、そのままオンラインショップに落とし込んだデモサイトです。
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button size="lg" className="rounded-2xl px-6">今すぐ見る</Button>
+              <Button size="lg" variant="outline" className="rounded-2xl px-6">ブランドストーリー</Button>
+            </div>
+            <div className="mt-10 grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-3">
+              <Card className="rounded-2xl shadow-sm">
+                <CardContent className="flex items-center gap-3 p-4">
+                  <Truck className="h-5 w-5 text-sky-700" />
+                  <div>
+                    <p className="text-sm font-semibold">全国配送</p>
+                    <p className="text-xs text-slate-500">最短2〜4日</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="rounded-2xl shadow-sm">
+                <CardContent className="flex items-center gap-3 p-4">
+                  <ShieldCheck className="h-5 w-5 text-sky-700" />
+                  <div>
+                    <p className="text-sm font-semibold">安心決済</p>
+                    <p className="text-xs text-slate-500">各種対応想定</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="rounded-2xl shadow-sm">
+                <CardContent className="flex items-center gap-3 p-4">
+                  <Star className="h-5 w-5 text-sky-700" />
+                  <div>
+                    <p className="text-sm font-semibold">人気商品</p>
+                    <p className="text-xs text-slate-500">定番を掲載</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="grid gap-4 sm:grid-cols-2"
+          >
+            <div className="overflow-hidden rounded-[2rem] shadow-xl sm:col-span-2">
+              <img
+                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=80"
+                alt="Fashion hero"
+                className="h-[360px] w-full object-cover"
+              />
+            </div>
+            <div className="overflow-hidden rounded-[2rem] shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
+                alt="Lifestyle"
+                className="h-52 w-full object-cover"
+              />
+            </div>
+            <div className="rounded-[2rem] bg-sky-900 p-6 text-white shadow-lg">
+              <p className="text-sm uppercase tracking-[0.3em] text-sky-200">Concept</p>
+              <h3 className="mt-3 text-2xl font-semibold">Simple. Fresh. Street.</h3>
+              <p className="mt-3 text-sm leading-6 text-sky-100">
+                余白のあるデザインで、街にも海にも合う着こなしを想定。
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <main id="shop" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.25em] text-sky-700">Shop</p>
+            <h2 className="mt-2 text-3xl font-bold">商品一覧</h2>
+            <p className="mt-2 text-slate-600">検索とカテゴリで絞り込みできます。</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+            <div className="relative min-w-[260px]">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="商品名・説明で検索"
+                className="rounded-2xl pl-10"
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((item) => (
+                <Button
+                  key={item}
+                  variant={category === item ? "default" : "outline"}
+                  className="rounded-2xl"
+                  onClick={() => setCategory(item)}
+                >
+                  {item}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filtered.map((product) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+            >
+              <Card className="overflow-hidden rounded-[2rem] border-0 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative">
+                  <img src={product.image} alt={product.name} className="h-80 w-full object-cover" />
+                  <Badge className="absolute left-4 top-4 rounded-full bg-white/90 text-slate-900 hover:bg-white/90">
+                    {product.badge}
+                  </Badge>
+                </div>
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm text-sky-700">{product.category}</p>
+                      <h3 className="mt-1 text-xl font-semibold">{product.name}</h3>
+                    </div>
+                    <p className="whitespace-nowrap text-lg font-bold">{yen(product.price)}</p>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{product.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {product.size.map((size) => (
+                      <Badge key={size} variant="outline" className="rounded-full">{size}</Badge>
+                    ))}
+                  </div>
+                  <div className="mt-5 flex gap-3">
+                    <Button className="flex-1 rounded-2xl" onClick={() => addToCart(product.id)}>
+                      カートに追加
+                    </Button>
+                    <Button variant="outline" className="rounded-2xl">詳細</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </main>
+
+      <section id="story" className="bg-white py-14">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+          <Card className="rounded-[2rem] border-0 shadow-md">
+            <CardContent className="p-8">
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-sky-700">Brand Story</p>
+              <h2 className="mt-3 text-3xl font-bold">MAR CRUZについて</h2>
+              <p className="mt-4 text-base leading-8 text-slate-600">
+                海の開放感とクロスモチーフの静かな強さをベースに、若い世代が普段使いしやすいストリートウェアを提案するブランド。
+                派手すぎず、でも印象に残る。そんなバランスを目指しています。
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="text-2xl font-bold">20–30代</p>
+                  <p className="text-sm text-slate-500">メインターゲット</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="text-2xl font-bold">Blue Tone</p>
+                  <p className="text-sm text-slate-500">ブランドカラー</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="text-2xl font-bold">Global</p>
+                  <p className="text-sm text-slate-500">国内外販売想定</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-[2rem] border-0 bg-slate-900 text-white shadow-md">
+            <CardContent className="p-8">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold">Cart</h3>
+                <ShoppingBag className="h-5 w-5" />
+              </div>
+              <div className="mt-6 space-y-4">
+                {cartItems.length === 0 ? (
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
+                    カートは空です。商品を追加するとここに表示されます。
+                  </div>
+                ) : (
+                  cartItems.map((item) => (
+                    <div key={item.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-medium">{item.name}</p>
+                          <p className="mt-1 text-sm text-slate-300">{yen(item.price)}</p>
+                        </div>
+                        <Button
+                          variant="outline"
+                          className="rounded-xl border-white/20 bg-transparent text-white hover:bg-white/10"
+                          onClick={() => removeFromCart(item.id)}
+                        >
+                          削除
+                        </Button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="mt-6 rounded-2xl bg-white p-5 text-slate-900">
+                <div className="flex items-center justify-between text-sm">
+                  <span>小計</span>
+                  <span>{yen(total)}</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-sm">
+                  <span>送料</span>
+                  <span>{cartItems.length ? "¥800" : "¥0"}</span>
+                </div>
+                <div className="mt-4 border-t pt-4">
+                  <div className="flex items-center justify-between text-lg font-bold">
+                    <span>合計</span>
+                    <span>{yen(total + (cartItems.length ? 800 : 0))}</span>
+                  </div>
+                </div>
+                <Button className="mt-5 w-full rounded-2xl">購入へ進む</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="contact" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <Card className="rounded-[2rem] border-0 bg-gradient-to-r from-sky-700 to-sky-900 text-white shadow-xl">
+          <CardContent className="grid gap-6 p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <p className="text-sm uppercase tracking-[0.25em] text-sky-100">Contact / SNS</p>
+              <h2 className="mt-2 text-3xl font-bold">ブランド立ち上げ用のECたたき台</h2>
+              <p className="mt-3 max-w-2xl text-sky-100">
+                このまま商品差し替え、決済連携、問い合わせ導線、特商法ページ追加などの本番仕様へ拡張できます。
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button variant="secondary" className="rounded-2xl px-6 text-slate-900">お問い合わせ</Button>
+              <Button variant="outline" className="rounded-2xl border-white/30 bg-transparent px-6 text-white hover:bg-white/10">
+                <Instagram className="mr-2 h-4 w-4" />
+                Instagram
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+    </div>
+  );
+}
